@@ -15,6 +15,11 @@ def print_version() -> None:
 
 def main() -> None:
     _args: list[str] = sys.argv
+
+    if len(_args) == 1:
+        print_help()
+        return
+
     _arg0: str = _args[1]
 
     match _arg0:

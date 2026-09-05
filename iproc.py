@@ -6,7 +6,7 @@ This file contains functions that help instructions process sth
 from custom_type import IResult
 import registers as _REG
 
-def _int_conv(val: str) -> int | None:
+def int_conv(val: str) -> int | None:
     _num: int | None = None
     try:
         match val[-1]:
@@ -26,7 +26,7 @@ def mov_hlper(dest: str, src: str) -> IResult:
         return IResult(1, "Destination not found.")
 
     if src[0] == '#':
-        _num = _int_conv(src.removeprefix("#"))
+        _num = int_conv(src.removeprefix("#"))
 
         if _num is None:
             return IResult(1, "Value type doesn't match.")

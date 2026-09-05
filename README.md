@@ -57,23 +57,28 @@ Lable:
 (This will cause infinite loop.)
 
 ## 指令集 Instruction Set
-| Instruction |   | Explanation |  
-| ----------- | - | ------------------ |
-| MOV [dest], [src] || To move value from src to dest. |
-| OUT [src] || To print value from src. |
-| NL || To make a new line. |
-| READ [dest] || To read value and store to dest. |
-| ADD [dest], [src] || To add dest's value by src's value. |
-| SUB [dest], [src] || To substruct dest's value by src's value. |
-| JMP [dest (lable)] || To go to the dest. | 
-| PUSH [src (reg)] || To push a register's value into stack. |
-| POP [dest] || To pop out from the stack to a register. |
-| CALL [dest] || To push the original PC and jump to dest lable. |
-| RET || To return to stored PC. |
-| NOP [ms] || To delay ms (originally meaning: no operation). |
-| BOUT [src (reg)] || To print a bitwise number. |
-| ANL [dest (reg)] [src] || Bitwise AND. |
-| ORL [dest (reg)] [src] || Bitwise OR. |
-| DJNZ [register] [dest] || Decrement and jump if not zero |
+| Instruction |Explanation |  
+| ----------- | ------------------ |
+| MOV [reg], [src] | To move value from src to reg. |
+| OUT [src] | To print value from src. |
+| NL | To make a new line. |
+| READ [reg] | To read value and store to reg. |
+| ADD [reg], [src] | To increase reg's value by src's value. |
+| SUB [reg], [src] | To substruct reg's value by src's value. |
+| MUL [reg a], [reg b] | To multiply a by b. |
+| DIV [reg a], [reg b] | To divide a by b, stores the remainder in b |
+| JMP [addr] | To go to the address (lable). | 
+| PUSH [reg] | To push a register's value into stack. |
+| POP [reg] | To pop out from the stack to a register. |
+| CALL [addr] | To push the original PC and jump to address (lable). |
+| RET | To return to stored PC. |
+| NOP [ms] | To delay ms (originally meaning: no operation). |
+| BOUT [src (reg)] | To print a bitwise number. |
+| ANL [dest (reg)] [src] | Bitwise AND. |
+| ORL [dest (reg)] [src] | Bitwise OR. |
+| DJNZ [reg] [dest] | Decrease and jump if not zero. |
+| CJNE [reg] [value] [addr] | Compare and jump if not equal. |
+| CPL [reg] | To flip each bit (bitwise XOR). |
+| DA [reg] | To adjust reg's decimal value to BCD. |
 
 (Instruction Set update datetime: `Sep. 5th, 2026`)

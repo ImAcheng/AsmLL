@@ -33,6 +33,14 @@ def decoder(line: str) -> IResult:
             return alpl_sub(_args[0], _args[1]) if len(_args) == 2 else \
                 IResult(1, "Args don't match the instruction.")
 
+        case "mul":
+            return alpl_mul(_args[0], _args[1]) if len(_args) == 2 else \
+                IResult(1, "Args don't match the instruction.")
+
+        case "div":
+            return alpl_div(_args[0], _args[1]) if len(_args) == 2 else \
+                IResult(1, "Args don't match the instruction.")
+
         case "jmp":
             return alpl_jmp(_args[0]) if len(_args) == 1 else \
                 IResult(1, "Args don't match the instruction.")
@@ -71,6 +79,18 @@ def decoder(line: str) -> IResult:
 
         case "djnz":
             return alpl_djnz(_args[0], _args[1]) if len(_args) == 2 else \
+                IResult(1, "Args don't match the instruction.")
+
+        case "cjne":
+            return alpl_cjne(_args[0], _args[1], _args[2]) if len(_args) == 3 else \
+                IResult(1, "Args don't match the instruction.")
+
+        case "cpl":
+            return alpl_cpl(_args[0]) if len(_args) == 1 else \
+                IResult(1, "Args don't match the instruction.")
+
+        case "da":
+            return alpl_da(_args[0]) if len(_args) == 1 else \
                 IResult(1, "Args don't match the instruction.")
 
         case _:

@@ -1,8 +1,13 @@
+; demo4.alpl
+; whatever I want to test here.
+; written by Lonely Acheng on Sep. 6, 2026
+
 _start:
-    MOV R0, #10
+    MOV R0, #13
+    MOV R1, #2
 
 _loop:
-    out R0
-    nl
-    DJNZ R0, _loop
-    out R0
+    DIV R0, R1
+    OUT R0
+    NL
+    OUT R1

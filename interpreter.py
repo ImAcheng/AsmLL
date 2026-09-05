@@ -9,8 +9,11 @@ def interprete(fp: str) -> IResult:
         return IResult(-1, "File not found.")
 
     instructions: list[str]
-    with open(fp) as file:
-        instructions = file.readlines()
+    try:
+        with open(fp) as file:
+            instructions = file.readlines()
+    except UnicodeError:
+        return IResult(-1, "Failed to read this file.")
 
     # lable check
     _lables: list[str] = [inst for inst in instructions if inst.strip().endswith(":") and ' ' not in inst.strip()]
