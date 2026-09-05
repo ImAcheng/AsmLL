@@ -1,0 +1,8 @@
+_start:
+    MOV R0, #10
+
+_loop:
+    out R0
+    nl
+    DJNZ R0, _loop
+    out R0

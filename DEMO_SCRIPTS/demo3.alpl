@@ -1,0 +1,30 @@
+; demo3.alpl
+; to demostrate bitwise operation
+; written by Lonely Acheng on Sep. 5, 2026
+
+jmp _start
+
+_start:
+    mov R0, #00111100B
+    mov R1, #00110011B
+
+    out $R0 Value  :
+    bout R0
+    nl
+
+    out $R1 value  :
+    bout R1
+    nl
+
+    NOP 1000
+
+    push R0
+    out $ORL Result:
+    ORL R0, R1
+    bout R0
+    nl
+    pop R0
+
+    out $ANL Result:
+    ANL R0, R1
+    bout R0

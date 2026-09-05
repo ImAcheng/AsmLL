@@ -1,0 +1,35 @@
+; demo0.alpl, a demo for AsmLL
+; written by Lonely Acheng on Sep. 3rd, 2026.
+
+_start:
+    out $Please input sth:  ; print a string
+    read R2                 ; get input and store to R2 register
+    mov R0, #2              ; move number [2] value to R0 register
+    mov R1, R0              ; move R0 register's valuie to R1 register
+    add R1, #2              ; add R0 register's valuie to R1 register
+
+    out $R1's number is:    ; print a string
+    out R1                  ; print R1 register's value
+    nl                      ; print a new line
+
+    jmp _lable              ; jump to _lable lable
+
+_back:
+    sub R1, #1              ; minus R1 register's value by 1
+    out $R1 minus 1 is:     ; print a string
+    out R1                  ; print R1 register's value
+    nl                      ; print a new line
+
+    out $User input:        ; print a string
+    out R2                  ; print R2 register's value
+    nl                      ; print a new line
+    jmp _end                ; jmp to _end lable
+
+_lable:
+    out $Jumped!            ; print a string
+    nl                      ; print a new line
+    jmp _back               ; jump to _back lable
+
+_end:
+    out $END!               ; print a string
+    

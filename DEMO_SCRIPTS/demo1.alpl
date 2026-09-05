@@ -1,0 +1,41 @@
+; demo1.alpl
+; to demostrate how stack works
+; written by Lonely Acheng on Sep. 5, 2026
+
+jmp _start
+
+_start:
+    mov R0, #10
+    mov R1, #20
+
+    push R0
+    push R1
+
+    mov R0, #30
+    mov R1, #30
+
+    jmp _addR0_R1
+
+_back:
+    out $30 + 30 =
+    out R0
+    nl
+
+    pop R1
+    pop R0
+
+    out $R0 has:
+    out R0
+    nl
+
+    out $R1 has:
+    out R1
+    nl
+
+    jmp _end
+
+_addR0_R1:
+    add R0, R1
+    jmp _back
+
+_end:

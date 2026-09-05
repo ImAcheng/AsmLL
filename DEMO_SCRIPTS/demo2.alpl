@@ -1,0 +1,25 @@
+; demo1.alpl
+; to demostrate how call & ret works
+; written by Lonely Acheng on Sep. 5, 2026
+
+jmp _start
+
+_start:
+    mov R0, #30
+    mov R1, #30
+
+    out $30 + 30 =
+    call _addR0_R1
+    out R2
+    nl
+
+    jmp _end
+
+_addR0_R1:
+    push R0
+    add R0, R1
+    mov R2, R0
+    pop R0
+    ret
+
+_end:
