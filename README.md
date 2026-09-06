@@ -46,15 +46,14 @@ Assembly -> C -> Python -> AsmLL
 | base-16 | H | #FH|
 
 ## 標籤 Lables
-```
-As every one knows, lable is a "mark" in assembly. We can call jump instructions to jump to the lable and execute instructions. But, uhh, yeah, due to some technical issues, please DO NOT put instruction in the same line after the lable (I will fix it in the future).
-```
 Example:
 ```
 Lable:
     JMP Lable
 ```
-(This will cause infinite loop.)
+(This will cause infinite loop.)  
+P.s. Don't put instruction in the same line,  
+it won't work.
 
 ## 指令集 Instruction Set
 | Instruction |Explanation |  

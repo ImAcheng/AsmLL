@@ -1,97 +1,53 @@
 from custom_type import *
 from instructions import *
 
+# operation set: (op, argc)
+_all_ops: dict[str, (IResult, int)] = {
+    "mov": (aplp_mov, 2),
+    "out": (alpl_out, 1),
+    "nl": (alpl_nl, 0),
+    "read": (alpl_read, 1),
+    "add": (alpl_add, 2),
+    "sub": (alpl_sub, 2),
+    "mul": (alpl_mul, 2),
+    "div": (alpl_div, 2),
+    "jmp": (alpl_jmp, 1),
+    "push": (alpl_push, 1),
+    "pop": (alpl_pop, 1),
+    "call": (alpl_call, 1),
+    "ret": (alpl_ret, 0),
+    "nop": (alpl_delay, 1),
+    "bout": (alpl_bout, 1),
+    "anl": (alpl_anl, 2),
+    "orl": (alpl_orl, 2),
+    "djnz": (alpl_djnz, 2),
+    "cjne": (alpl_cjne, 3),
+    "cpl": (alpl_cpl, 1),
+    "da": (alpl_da, 1)
+}
+
 def decoder(line: str) -> IResult:
-    _cmt_inst = line.split(";")
-    _op_arg = _cmt_inst[0].strip().split(" ", 1)
-    _opcode = _op_arg[0].lower()
-    _args: list[str] = [] if len(_op_arg) == 1 \
-        else [arg.strip() for arg in _op_arg[1].split(",")]
+    # get the acutal instruction
+    line = line.split(";", 1)[0].strip()
 
-    match _opcode:
-        case "mov":
-            return aplp_mov(_args[0], _args[1]) if len(_args) == 2 \
-                else IResult(1, "Args don't match the instruction.") 
+    parts = line.split(None, 1)
+    opcode = parts[0].lower()
 
-        case "out":
-            return alpl_out(_args[0]) if len(_args) == 1 \
-                else IResult(1, "Args don't match the instruction.")
+    opset = _all_ops.get(opcode)
 
-        case "nl":
-            return alpl_nl() if len(_args) == 0 else \
-                IResult(1, "Args don't match the instruction.")
+    
 
-        case "read":
-            return alpl_read(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
+    if opset is None:
+        return IResult(-1, "Invalid instruction.")
 
-        case "add":
-            return alpl_add(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
+    if len(parts) == 1:
+        args = []
+    else:
+        args = [arg.strip() for arg in parts[1].split(",")]
 
-        case "sub":
-            return alpl_sub(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
+    if len(args) != opset[1]:
+        return IResult(-1, "Invalid instruction.")
 
-        case "mul":
-            return alpl_mul(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
+    # print(f"[DECODER] {reg.PC} {args}")
 
-        case "div":
-            return alpl_div(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "jmp":
-            return alpl_jmp(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "push":
-            return alpl_push(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "pop":
-            return alpl_pop(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "call":
-            return alpl_call(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "ret":
-            return alpl_ret() if len(_args) == 0 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "nop":
-            return alpl_delay(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-        
-        case "bout":
-            return alpl_bout(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-        
-        case "anl":
-            return alpl_anl(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "orl":
-            return alpl_orl(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "djnz":
-            return alpl_djnz(_args[0], _args[1]) if len(_args) == 2 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "cjne":
-            return alpl_cjne(_args[0], _args[1], _args[2]) if len(_args) == 3 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "cpl":
-            return alpl_cpl(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case "da":
-            return alpl_da(_args[0]) if len(_args) == 1 else \
-                IResult(1, "Args don't match the instruction.")
-
-        case _:
-            return IResult(1, "Unknown instruction.")
+    return opset[0](*args)

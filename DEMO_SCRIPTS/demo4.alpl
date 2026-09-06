@@ -3,11 +3,11 @@
 ; written by Lonely Acheng on Sep. 6, 2026
 
 _start:
-    MOV R0, #13
-    MOV R1, #2
+    MOV R0, #FFFFH
 
 _loop:
-    DIV R0, R1
     OUT R0
+    SUB R0, #1
     NL
-    OUT R1
+    CJNE R0, #0, _loop
+    OUT R0
