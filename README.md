@@ -41,8 +41,9 @@ Assembly -> C -> Python -> AsmLL
 ## N進制數字表示 To Represents Base-N Number
 | Base | Symbol | Example |
 | :----: | :---------: | ------- |
-| base-10 | (No) | #15 |
 | base-2 | B | #1111B |
+| base-8 | O | #17o |
+| base-10 | (No) | #15 |
 | base-16 | H | #FH|
 
 ## 標籤 Lables

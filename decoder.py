@@ -33,9 +33,7 @@ def decoder(line: str) -> IResult:
     parts = line.split(None, 1)
     opcode = parts[0].lower()
 
-    opset = _all_ops.get(opcode)
-
-    
+    opset = _all_ops.get(opcode)    
 
     if opset is None:
         return IResult(-1, "Invalid instruction.")
@@ -47,7 +45,5 @@ def decoder(line: str) -> IResult:
 
     if len(args) != opset[1]:
         return IResult(-1, "Invalid instruction.")
-
-    # print(f"[DECODER] {reg.PC} {args}")
 
     return opset[0](*args)

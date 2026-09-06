@@ -3,7 +3,7 @@
 ; written by Lonely Acheng on Sep. 6, 2026
 
 _start:
-    MOV R0, #FFFFH
+    MOV R0, #17o
 
 _loop:
     OUT R0

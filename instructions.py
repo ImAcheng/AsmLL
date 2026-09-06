@@ -5,9 +5,6 @@ from custom_type import *
 import registers as reg
 from iproc import *
 
-# Dev log: Sep. 5, 2026
-# planning to remove user_vars since I want this language to simulate asm
-
 """
     Special symbol meaning:
         # number
@@ -135,15 +132,11 @@ def alpl_delay(dt: str) -> IResult:
     it works because we know the exact cpu cycle each instruction needs.
     But we're now in python, who knows lah.
     """
-
-    ms: int = 0
-
+    
     try:
-        ms = int(dt)
+        sleep(int(dt) / 1000)
     except ValueError:
         return IResult(1, "Value is not a number.")
-
-    sleep(ms / 1000)
 
     return IResult(0)
 

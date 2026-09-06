@@ -9,11 +9,13 @@ import registers as _REG
 def int_conv(val: str) -> int | None:
     _num: int | None = None
     try:
-        match val[-1]:
+        match val[-1].upper():
             case 'B':
-                _num = int(val.removesuffix("B"), 2)
+                _num = int(val.removesuffix("B").removesuffix("b"), 2)
+            case 'O':
+                _num = int(val.removesuffix("O").removesuffix("o"), 8)
             case 'H':
-                _num = int(val.removesuffix("H"), 16)
+                _num = int(val.removesuffix("H").removesuffix("h"), 16)
             case _:
                 _num = int(val, 10)
     except ValueError:
